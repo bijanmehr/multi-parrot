@@ -3,9 +3,8 @@ import rospy
 from std_msgs.msg import String
 import serial
 import serial.tools.list_ports
-from multi_parrot_red.srv import *
+from multi_parrot_blue.srv import *
 import time
-
 
 parrot_serial = None
 arduino_serial = None
@@ -27,10 +26,11 @@ def Search_for_parrot_serial_port():
         while True:
             if test_serial.inWaiting():
                 text = test_serial.readline()#.decode('utf-8')
-                if text.find('red_parrot') != -1:
+                if text.find('parrot') != -1:
                     parrot_serial = test_serial
-                    print('!!!red parrot port found on port %s!!!'%port[0])
+                    print('!!!blue parrot port found on port %s!!!'%port[0])
                     break
+
                 else:pass
 
 
@@ -48,8 +48,8 @@ def handle_parrot_connection(req):
 
 
 def handel_connections():
-    rospy.init_node('serial_handler')
-    parrot_service = rospy.Service('serial_handler/redparrot', RedParrot, handle_parrot_connection)
+    rospy.init_node('blue_serial_handler')
+    parrot_service = rospy.Service('serial_handler/blueparrot', BlueParrot, handle_parrot_connection)
     rospy.spin()
 
 if __name__ == "__main__":

@@ -129,9 +129,9 @@ def parrot_voice_commands(data):
 
 
 def ros_init():
-    rospy.init_node('parrot', log_level=rospy.DEBUG)
-    rospy.Subscriber('web/blue_parrot_commands', String, parrot_commands, queue_size=10)
-    rospy.Subscriber("web/blue_parrot_voice_commands", String, parrot_voice_commands, queue_size=10)
+    rospy.init_node('blue_parrot', log_level=rospy.DEBUG)
+    rospy.Subscriber('/parrot/1/parrot_commands', String, parrot_commands, queue_size=10)
+    rospy.Subscriber("/parrot/1/audio_player", String, parrot_voice_commands, queue_size=10)
     rospy.spin()
 
 

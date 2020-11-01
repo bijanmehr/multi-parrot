@@ -30,9 +30,9 @@ def audio_movement(data):
     full_turn()
 
 def parrot_handler():
-    rospy.init_node('Red_parrot')
-    rospy.Subscriber("red_parrot_movment", String, movment, queue_size=10)
-    rospy.Subscriber("audio_commands", String, audio_movement, queue_size=10)
+    rospy.init_node('red_parrot')
+    rospy.Subscriber("/parrot/0/parrot_commands", String, movment, queue_size=10)
+    rospy.Subscriber("/parrot/0/audio_player", String, audio_movement, queue_size=10)
     rospy.spin()
 
 if __name__ == "__main__":

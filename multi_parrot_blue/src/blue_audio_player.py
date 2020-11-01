@@ -21,8 +21,8 @@ def stop_sound():
 
 
 def ros_init():
-    rospy.init_node('audio_player', log_level=rospy.DEBUG)
-    rospy.Subscriber("audio_commands", String, play_sound, queue_size=10)
+    rospy.init_node('blue_audio_player', log_level=rospy.DEBUG)
+    rospy.Subscriber("/parrot/1/audio_player", String, play_sound, queue_size=10)
 
 
 def pygame_init():
