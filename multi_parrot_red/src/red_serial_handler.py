@@ -25,13 +25,13 @@ def Search_for_parrot_serial_port():
         test_serial.open()
         time_last = time.time()
         while True:
-            if test_serial.inWaiting():
-                text = test_serial.readline()#.decode('utf-8')
-                if text.find('red_parrot') != -1:
-                    parrot_serial = test_serial
-                    print('!!!red parrot port found on port %s!!!'%port[0])
-                    break
-                else:pass
+
+            text = test_serial.readline()#.decode('utf-8')
+            if text.find('red_parrot') != -1:
+                parrot_serial = test_serial
+                print('!!!red parrot port found on port %s!!!'%port[0])
+                break
+            else:pass
 
 
             if time.time()-time_last > 10:
@@ -49,7 +49,7 @@ def handle_parrot_connection(req):
 
 def handel_connections():
     rospy.init_node('red_serial_handler')
-    parrot_service = rospy.Service('serial_handler/redparrot', RedParrot, handle_parrot_connection)
+    parrot_service = rospy.Service('red_serial_handler/redparrot', RedParrot, handle_parrot_connection)
     rospy.spin()
 
 if __name__ == "__main__":
