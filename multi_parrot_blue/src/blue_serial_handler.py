@@ -23,15 +23,15 @@ def Search_for_parrot_serial_port():
         test_serial.close()
         test_serial.open()
         time_last = time.time()
+        
         while True:
-            if test_serial.inWaiting():
-                text = test_serial.readline()#.decode('utf-8')
-                if text.find('parrot') != -1:
-                    parrot_serial = test_serial
-                    print('!!!blue parrot port found on port %s!!!'%port[0])
-                    break
 
-                else:pass
+            text = test_serial.readline()#.decode('utf-8')
+            if text.find('parrot') != -1:
+                parrot_serial = test_serial
+                print('!!!blue parrot port found on port %s!!!'%port[0])
+                break
+            else:pass
 
 
             if time.time()-time_last > 10:
