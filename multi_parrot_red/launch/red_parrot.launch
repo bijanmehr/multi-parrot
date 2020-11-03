@@ -1,0 +1,6 @@
+<launch>
+    <node name="red_parrot" pkg="multi_parrot_red" type="red_parrot.py" output="screen"/>
+    <node name="red_audio_player" pkg="multi_parrot_red" type="red_audio_player.py" output="screen"/>
+    <node name="red_serial_handler" pkg="multi_parrot_red" type="red_serial_handler.py" output="screen"/>
+
+</launch>
