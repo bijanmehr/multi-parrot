@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import rospy
 import serial
 import time
@@ -36,8 +36,8 @@ def parrot_client(command):
         parrot_connection = rospy.ServiceProxy('serial_handler/blueparrot', BlueParrot)
         result = parrot_connection(command)
         return result.result
-    except rospy.ServiceException, e:
-        print "Service call failed: %s"%e
+    except rospy.ServiceException as e:
+        print ("Service call failed: %s"%e)
 
 def dance(number = 1):
     res = parrot_client('G1 S%d'%number)

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import rospy
 from std_msgs.msg import String
 import pygame
@@ -10,6 +10,7 @@ import math
 def play_sound(data):
     text = data.data
     if text.find("shutup") == -1:
+        pygame.mixer.stop()
         pygame.mixer.Sound.play(pygame.mixer.Sound(data.data))
     elif text.find("shutup") != -1:
         stop_sound()
