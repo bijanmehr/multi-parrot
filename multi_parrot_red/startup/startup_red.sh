@@ -2,4 +2,4 @@
 
 source $(rospack find multi_parrot_red)/startup/ROS_param.sh
 
-roslaunch multi_parrot_red main.launch
+roslaunch multi_parrot_red red_parrot.launch

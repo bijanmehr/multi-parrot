@@ -7,9 +7,9 @@ import serial.tools.list_ports
 import time
 
 def parrot_client(command):
-    rospy.wait_for_service('serial_handler/parrot')
+    rospy.wait_for_service('red_serial_handler/redparrot')
     try:
-        parrot_connection = rospy.ServiceProxy('serial_handler/redparrot', RedParrot)
+        parrot_connection = rospy.ServiceProxy('red_serial_handler/redparrot', RedParrot)
         result = parrot_connection(command)
         return result.result
     except rospy.ServiceException, e:
