@@ -1,0 +1,18 @@
+<launch>
+    <machine name="server" address="192.168.0.104" user="cabinet" password="1" env-loader="/home/cabinet/Desktop/multi-parrot/multi_parrot_web/startup/ros_env.sh">
+    <machine name="red_parrot" address="192.168.0.102" user="pi" password="raspberry" env-loader="/home/pi/catkin_ws/src/multi_parrot_red/startup/red_env.sh">
+    <machine name="blue_parrot" address="192.168.0.105" user="lenovo" password="1" env-loader="/home/lenovo/catkin_ws/src/multi_parrot_blue/startup/blue_env.sh">
+
+    <group ns="red_parrot">
+        <node machine="red_parrot" pkg="multi_parrot_red" name="red_audio_player" type="red_audio_player.py" output="screen"></node>
+        <node machine="red_parrot" pkg="multi_parrot_red" name="red_serial_handler" type="red_serial_handler.py" output="screen"></node>
+        <node machine="red_parrot" pkg="multi_parrot_red" name="red_parrot" type="red_parrot.py" output="screen"></node>
+    </group>
+
+    <group ns="blue_parrot">
+        <node machine="blue_parrot" pkg="multi_parrot_blue" name="blue_audio_player" type="blue_audio_player.py" output="screen"></node>
+        <node machine="blue_parrot" pkg="multi_parrot_blue" name="blue_serial_handler" type="blue_serial_handler.py" output="screen"></node>
+        <node machine="blue_parrot" pkg="multi_parrot_blue" name="blue_parrot" type="blue_parrot.py" output="screen"></node>
+    </group>
+
+</launch>
