@@ -49,7 +49,7 @@ def handle_parrot_connection(req):
 
 def handel_connections():
     rospy.init_node('blue_serial_handler')
-    parrot_service = rospy.Service('serial_handler/blueparrot', BlueParrot, handle_parrot_connection)
+    parrot_service = rospy.Service('blue_serial_handler/blueparrot', BlueParrot, handle_parrot_connection)
     rospy.spin()
 
 if __name__ == "__main__":

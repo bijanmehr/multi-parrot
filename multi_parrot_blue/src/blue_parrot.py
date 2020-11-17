@@ -31,9 +31,9 @@ def parrot_queue_handler():
 
 
 def parrot_client(command):
-    rospy.wait_for_service('serial_handler/parrot')
+    rospy.wait_for_service('blue_serial_handler/blueparrot')
     try:
-        parrot_connection = rospy.ServiceProxy('serial_handler/blueparrot', BlueParrot)
+        parrot_connection = rospy.ServiceProxy('blue_serial_handler/blueparrot', BlueParrot)
         result = parrot_connection(command)
         return result.result
     except rospy.ServiceException as e:
@@ -74,55 +74,34 @@ def close_eye(pwm = 105):
     else:
         print("not done")
 
-
 def talk():
-    pop_all_parrot_funcs()
-    append_to_parrot_funcs(mouth,240)
-    append_to_parrot_funcs(mouth,0,0.5)
-    append_to_parrot_funcs(mouth,240,0.5)
-    append_to_parrot_funcs(mouth,0,0.5)
-
-
-
-parrot_funcs = []
-parrot_funcs_params = []
-parrot_funcs_delay = []
-
-def append_to_parrot_funcs(functions,param = -1,delay = -1):
-    global parrot_funcs , parrot_funcs_params ,parrot_funcs_delay
-    parrot_funcs.append(functions)
-    parrot_funcs_params.append(param)
-    parrot_funcs_delay.append(delay)
-
-def pop_all_parrot_funcs():
-    global parrot_funcs , parrot_funcs_params ,parrot_funcs_delay
-    parrot_funcs = []
-    parrot_funcs_params = []
-    parrot_funcs_delay = []
+    mouth(240)
+    time.sleep(.5)
+    mouth(0)
+    time.sleep(.5)
+    mouth(240)
+    time.sleep(.5)
+    mouth(0)
 
 
 
 def parrot_commands(data):
-    if(int(data.data) == 0 ):   # dance
-        append_to_parrot_funcs(dance)
-    elif(int(data.data) == 1 ):  # blink
-        append_to_parrot_funcs(blink)
-    elif(int(data.data) == 2 ): # open mouth
-        append_to_parrot_funcs(mouth,240)
-    elif(int(data.data) == 3 ): # close mouth
-        append_to_parrot_funcs(mouth,0)
-    elif(int(data.data) == 4 ): # open eye
-        append_to_parrot_funcs(open_eye)
-    elif(int(data.data) == 5 ): # close eye
-        append_to_parrot_funcs(close_eye)
-    elif(int(data.data) == 6): # open and close mouth
-        append_to_parrot_funcs(mouth,240)
-        append_to_parrot_funcs(mouth,0,0.5)
-        append_to_parrot_funcs(mouth,240,0.5)
-        append_to_parrot_funcs(mouth,0,0.5)
+    if(int(data.data) == 100 ):   # dance
+        dance()
+    elif(int(data.data) == 101 ):  # blink
+        blink()
+    elif(int(data.data) == 102 ): # open mouth
+        mouth(240)
+    elif(int(data.data) == 103 ): # close mouth
+        mouth(0)
+    elif(int(data.data) == 104 ): # open eye
+        open_eye()
+    elif(int(data.data) == 105 ): # close eye
+        close_eye()
+    elif(int(data.data) == 106): # talk
+        talk()
 
-    
-def parrot_voice_commands(data):
+def audio_command(data):
     text = data.data
     if text.find("shutup") == -1:
         talk()
@@ -131,7 +110,7 @@ def parrot_voice_commands(data):
 def ros_init():
     rospy.init_node('blue_parrot', log_level=rospy.DEBUG)
     rospy.Subscriber('/parrot/1/parrot_commands', String, parrot_commands, queue_size=10)
-    rospy.Subscriber("/parrot/1/audio_player", String, parrot_voice_commands, queue_size=10)
+    rospy.Subscriber("/parrot/1/audio_player", String, audio_command, queue_size=10)
     rospy.spin()
 
 
