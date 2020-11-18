@@ -19,7 +19,7 @@ def parrot_client(command):
 
 
 def full_turn():
-    parrot_client("180")
+    parrot_client("45")
     time.sleep(0.7)
     parrot_client("0")
 
