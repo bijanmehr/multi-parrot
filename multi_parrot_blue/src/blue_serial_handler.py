@@ -12,7 +12,7 @@ baudrates = 115200
 
 
 def Search_for_parrot_serial_port():
-    global parrot_serial,arduino_serial
+    global parrot_serial
     available_ports = [tuple(p) for p in list(serial.tools.list_ports.comports())]
     for port in available_ports:
         test_serial = serial.Serial(

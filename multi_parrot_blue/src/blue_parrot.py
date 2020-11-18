@@ -1,33 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import rospy
 import serial
 import time
 from multi_parrot_blue.srv import *
 from std_msgs.msg import String
-
-
-
-def parrot_queue_handler():
-    global parrot_funcs , parrot_funcs_params ,parrot_funcs_delay
-    try:
-        if parrot_funcs:
-            rospy.logerr(parrot_funcs)
-            if parrot_funcs_delay[0] != -1:
-                time.sleep(parrot_funcs_delay[0])
-
-            if parrot_funcs_params[0] != -1:
-                parrot_funcs[0](parrot_funcs_params[0])
-            else:
-                parrot_funcs[0]()
-
-            parrot_funcs.pop(0)
-            parrot_funcs_params.pop(0)
-            parrot_funcs_delay.pop(0)
-
-    except Exception as e :
-        rospy.logerr('error in parrot_queue_handler ! : %s'%e)
-        # print('error in parrot_queue_handler !',e)
-
 
 
 def parrot_client(command):
@@ -115,5 +91,4 @@ def ros_init():
 
 
 if __name__ == "__main__":
-    parrot_queue_handler()
     ros_init()
