@@ -22,7 +22,7 @@ def dance(number = 1):
     else:
         print("not done")
 
-def blink(pwm = 180):
+def blink(pwm = 120):
     res = parrot_client('G2 S%d'%pwm)
     if(res.find("DONE") != 1):
         print ("done")
@@ -43,7 +43,7 @@ def open_eye(pwm = 130):
     else:
         print("not done")
 
-def close_eye(pwm = 105):
+def close_eye(pwm = 80):
     res = parrot_client('G5 S%d'%pwm)
     if(res.find("DONE") != 1):
         print ("done")

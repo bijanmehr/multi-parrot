@@ -8,7 +8,7 @@ import time
 
 parrot_serial = None
 arduino_serial = None
-baudrates = 115200
+baudrates = 9600
 
 
 def Search_for_parrot_serial_port():
@@ -48,7 +48,7 @@ def handle_parrot_connection(req):
 
 
 def handel_connections():
-    rospy.init_node('blue_serial_handler')
+    rospy.init_node('blue_serial_handler', log_level=rospy.DEBUG)
     parrot_service = rospy.Service('blue_serial_handler/blueparrot', BlueParrot, handle_parrot_connection)
     rospy.spin()
 
