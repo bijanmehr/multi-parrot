@@ -19,7 +19,7 @@ def parrot_client(command):
 
 
 def full_turn():
-    parrot_client("180")
+    parrot_client("45")
     time.sleep(0.7)
     parrot_client("0")
 
@@ -30,7 +30,7 @@ def audio_movement(data):
     full_turn()
 
 def parrot_handler():
-    rospy.init_node('red_parrot')
+    rospy.init_node('red_parrot', log_level=rospy.DEBUG)
     rospy.Subscriber("/parrot/0/parrot_commands", String, movment, queue_size=10)
     rospy.Subscriber("/parrot/0/audio_player", String, audio_movement, queue_size=10)
     rospy.spin()

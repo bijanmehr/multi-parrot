@@ -48,7 +48,7 @@ def handle_parrot_connection(req):
 
 
 def handel_connections():
-    rospy.init_node('red_serial_handler')
+    rospy.init_node('red_serial_handler', log_level=rospy.DEBUG)
     parrot_service = rospy.Service('red_serial_handler/redparrot', RedParrot, handle_parrot_connection)
     rospy.spin()
 
