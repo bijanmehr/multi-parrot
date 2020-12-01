@@ -33,8 +33,14 @@ class ParrotGateway:
         publishers['cmd_name'].publish(str(cmd.name))
         if cmd.is_voice():
             cmd_config = CommandConfig.get()
-            prefix = cmd_config.voice_path_prefix
-            postfix = cmd_config.voice_path_postfix
+            prefix, postfix = '', ''
+            if std_id == red_parrot_ids[0]:
+                prefix = cmd_config.red_parrot_voice_path_prefix 
+                postfix = cmd_config.red_parrot_voice_path_postfix
+            else:
+                prefix = cmd_config.blue_parrot_voice_path_prefix 
+                postfix = cmd_config.blue_parrot_voice_path_postfix
+  
 
             publishers['voice_path'].publish(str(prefix + cmd.voice_file_name + postfix))
         else:

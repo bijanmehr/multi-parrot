@@ -79,8 +79,11 @@ class CommandConfig(models.Model):
     def clean(self):
         validate_only_one_instance(self)
 
-    voice_path_prefix = models.CharField(max_length= 256, default= "./")
-    voice_path_postfix = models.CharField(max_length= 256, default= ".wav")
+    red_parrot_voice_path_prefix = models.CharField(max_length= 256, blank=True, default= "./")
+    red_parrot_voice_path_postfix = models.CharField(max_length= 256, blank=True, default= ".wav")
+
+    blue_parrot_voice_path_prefix = models.CharField(max_length= 256, blank=True, default= "./")
+    blue_parrot_voice_path_postfix = models.CharField(max_length= 256, blank=True, default= ".wav")
 
     @staticmethod
     def get():

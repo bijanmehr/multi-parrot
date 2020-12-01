@@ -68,6 +68,12 @@ instance/
 # Scrapy stuff:
 .scrapy
 
+*.pyc
+*.sqlite3
+.idea/
+venv/
+__pycache__/
+
 # Sphinx documentation
 docs/_build/
 
